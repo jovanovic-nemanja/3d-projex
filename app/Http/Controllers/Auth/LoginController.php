@@ -6,7 +6,6 @@ use Session;
 use App\User;
 use App\Role;
 use Socialite;
-use App\Category;
 use App\RoleUser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -34,111 +33,18 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/vendor';
+    protected $redirectTo = '/admin';
 
     public function redirectTo(){
-        // User role
-        if (auth()->user()->hasRole('admin')) {
-            return '/admin/vendor';
-        }
-    }
+      // User role Admin
+      if (auth()->user()->hasRole('admin')) {
+        return '/admin';
+      }
 
-    /**
-      * Redirect the user to the Google authentication page.
-      *
-      * @return \Illuminate\Http\Response
-      */
-    public function redirectToProvidergoogle()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-
-    /**
-     * Obtain the user information from Google.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function handleProviderCallbackgoogle()
-    {
-        try {
-            $user = Socialite::driver('google')->user();
-        } catch (\Exception $e) {
-            return response()->json(['status' => "error", 'msg' => "Failed Google Redirected."]);
-        }
-
-        // check if they're an existing user
-        $existingUser = User::where('email', $user->email)->first();
-        if($existingUser){
-            // log them in
-            auth()->login($existingUser, true);
-        } else {
-            // create a new user
-            $newUser                  = new User;
-            $newUser->username        = $user->name;
-            $newUser->email           = $user->email;
-            $newUser->sign_date       = date('Y-m-d h:i:s');
-            $newUser->google_id     = $user->id;
-            $newUser->save();
-
-            RoleUser::create([
-                'user_id' => $newUser->id,
-                'role_id' => 3,
-            ]);
-
-            auth()->login($newUser, true);
-        }
-        $result = Category::all();
-
-        return response()->json(['status' => "success", 'msg' => "Successfully Logged In.", "data" => $result]);
-    }
-
-    /**
-      * Redirect the user to the Facebook authentication page.
-      *
-      * @return \Illuminate\Http\Response
-      */
-    public function redirectToProviderfacebook()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
-
-    /**
-     * Obtain the user information from Google.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function handleProviderCallbackfacebook()
-    {
-        try {
-            $user = Socialite::driver('facebook')->user();
-        } catch (\Exception $e) {
-            return response()->json(['status' => "error", 'msg' => "Failed Facebook Redirected."]);
-        }
-
-        // check if they're an existing user
-        $existingUser = User::where('email', $user->email)->first();
-        if($existingUser){
-            // log them in
-            auth()->login($existingUser, true);
-        } else {
-            // create a new user
-            $newUser                  = new User;
-            $newUser->username        = $user->name;
-            $newUser->email           = $user->email;
-            $newUser->sign_date       = date('Y-m-d h:i:s');
-            $newUser->facebook_id     = $user->id;
-            $newUser->save();
-
-            RoleUser::create([
-                'user_id' => $newUser->id,
-                'role_id' => 3,
-            ]);
-
-            auth()->login($newUser, true);
-        }
-        $result = Category::all();
-
-        return response()->json(['status' => "success", 'msg' => "Successfully Logged In.", "data" => $result]);
+      // User role User
+      if (auth()->user()->hasRole('user')) {
+        return '/';
+      }
     }
 
     /**

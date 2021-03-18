@@ -6,7 +6,6 @@ use Mail;
 use Session;
 use App\User;
 use App\Role;
-use App\Image;
 use App\RoleUser;
 use App\VerifyEmailcodes;
 
@@ -16,8 +15,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
-use App\Http\Controllers\Frontend\EmailsController;
 
 class RegisterController extends Controller
 {
