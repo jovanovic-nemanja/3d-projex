@@ -15,7 +15,7 @@ class CheckUserRoleIsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(!auth()->user()->hasRole('admin')) {
+        if(!auth()->user()->Role('admin')) {
             abort(404);
         }
 

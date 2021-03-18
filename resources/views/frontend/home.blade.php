@@ -100,27 +100,27 @@
             <div class="panel panel-default">
               <div class="panel-heading">Adjust Wall</div>
               <div class="panel-body" style="color: #333333">
-                <div class="col-sm-6" style="padding: 3px">
+                <div class="" style="padding: 3px">
                   <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/uae.jpg') }}" texture-stretch="false" texture-scale="400">
                     <img alt="Thumbnail marbletiles" src="{{ asset('3d/rooms/thumbnails/uae.jpg') }}" />
                   </a>
                 </div>
-                <div class="col-sm-6" style="padding: 3px">
+                <div class="" style="padding: 3px">
                   <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/burjkalifatower.jpg') }}" texture-stretch="false" texture-scale="400">
                     <img alt="Thumbnail marbletiles" src="{{ asset('3d/rooms/thumbnails/burjkalifatower.jpg') }}" />
                   </a>
                 </div>
-                <div class="col-sm-6" style="padding: 3px">
+                <div class="" style="padding: 3px">
                   <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/marbletiles.jpg') }}" texture-stretch="false" texture-scale="300">
                     <img alt="Thumbnail marbletiles" src="{{ asset('3d/rooms/thumbnails/thumbnail_marbletiles.jpg') }}" />
                   </a>
                 </div>
-                <div class="col-sm-6" style="padding: 3px">
+                <div class="" style="padding: 3px">
                   <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/wallmap_yellow.png') }}" texture-stretch="true" texture-scale="">
                     <img alt="Thumbnail wallmap yellow" src="{{ asset('3d/rooms/thumbnails/thumbnail_wallmap_yellow.png') }}" />
                   </a>
                 </div>
-                <div class="col-sm-6" style="padding: 3px">
+                <div class="" style="padding: 3px">
                   <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/light_brick.jpg') }}" texture-stretch="false" texture-scale="100">
                     <img alt="Thumbnail light brick" src="{{ asset('3d/rooms/thumbnails/thumbnail_light_brick.jpg') }}" />
                   </a>
@@ -248,37 +248,37 @@
             <div class="row" id="items-wrapper">
             	<div class="col-sm-4">
             		<a class="thumbnail add-item" model-name="Bar Stool" model-url="{{ asset('3d/models/js/chair_1-2.js') }}" model-type="1" model-price="1000" model-image="{{ asset('3d/models/thumbnails/chair-red.png') }}">
-            			<img src="{{ asset('3d/models/thumbnails/chair-red.png') }}" alt="Add Item">Bar Stool&nbsp; /&nbsp;  AED
+            			<img class="add_model" src="{{ asset('3d/models/thumbnails/chair-red.png') }}" alt="Add Item">Bar Stool&nbsp; /&nbsp;  AED
         			</a>
             	</div>
 
             	<div class="col-sm-4">
             		<a class="thumbnail add-item" model-name="TV" model-url="{{ asset('3d/models/js/led_1-2.js') }}" model-type="2" model-price="2000" model-image="{{ asset('3d/models/thumbnails/TV.png') }}">
-            			<img src="{{ asset('3d/models/thumbnails/TV.png') }}" alt="Add Item">TV&nbsp; /&nbsp; 2000 AED
+            			<img class="add_model" src="{{ asset('3d/models/thumbnails/TV.png') }}" alt="Add Item">TV&nbsp; /&nbsp; 2000 AED
         			</a>
             	</div>
 
             	<div class="col-sm-4">
             		<a class="thumbnail add-item" model-name="Round Table" model-url="{{ asset('3d/models/js/table_round.js') }}" model-type="1" model-price="500" model-image="{{ asset('3d/models/thumbnails/roundtable.png') }}">
-            			<img src="{{ asset('3d/models/thumbnails/roundtable.png') }}" alt="Add Item">Round Table&nbsp; /&nbsp; 500 AED
+            			<img class="add_model" src="{{ asset('3d/models/thumbnails/roundtable.png') }}" alt="Add Item">Round Table&nbsp; /&nbsp; 500 AED
         			</a>
             	</div>
 
             	<div class="col-sm-4">
             		<a class="thumbnail add-item" model-name="Box" model-url="{{ asset('3d/models/js/table4_1-2.js') }}" model-type="1" model-price="3000" model-image="{{ asset('3d/models/thumbnails/box.png') }}">
-            			<img src="{{ asset('3d/models/thumbnails/box.png') }}" alt="Add Item">Box&nbsp; /&nbsp; 3000 AED
+            			<img class="add_model" src="{{ asset('3d/models/thumbnails/box.png') }}" alt="Add Item">Box&nbsp; /&nbsp; 3000 AED
         			</a>
             	</div>
 
             	<div class="col-sm-4">
             		<a class="thumbnail add-item" model-name="Structure" model-url="{{ asset('3d/models/js/structure.js') }}" model-type="2" model-price="3300" model-image="{{ asset('3d/models/thumbnails/structure.png') }}">
-            			<img src="{{ asset('3d/models/thumbnails/structure.png') }}" alt="Add Item">Structure&nbsp; /&nbsp; 3300 AED
+            			<img class="add_model" src="{{ asset('3d/models/thumbnails/structure.png') }}" alt="Add Item">Structure&nbsp; /&nbsp; 3300 AED
         			</a>
             	</div>
 
             	<div class="col-sm-4">
             		<a class="thumbnail add-item" model-name="Wall Closet" model-url="{{ asset('3d/models/js/cobord.js') }}" model-type="1" model-price="5000" model-image="{{ asset('3d/models/thumbnails/wallpaper.png') }}">
-            			<img src="{{ asset('3d/models/thumbnails/wallpaper.png') }}" alt="Add Item">Wall Closet&nbsp; /&nbsp; 5000 AED
+            			<img class="add_model" src="{{ asset('3d/models/thumbnails/wallpaper.png') }}" alt="Add Item">Wall Closet&nbsp; /&nbsp; 5000 AED
         			</a>
             	</div>
             </div>

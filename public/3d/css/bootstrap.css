@@ -1123,7 +1123,7 @@ img {
 .carousel-inner > .item > a > img {
   display: block;
   max-width: 100%;
-  height: 25rem;
+  /*height: 25rem;*/
 }
 .img-rounded {
   border-radius: 6px;
@@ -6798,3 +6798,7 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.add_model {
+  height: 25rem !important;
+}

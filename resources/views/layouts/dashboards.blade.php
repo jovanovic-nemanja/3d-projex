@@ -43,7 +43,7 @@
                         <ul class="navbar-nav navbar-nav-right">
                             <li class="nav-item dropdown d-inline-flex align-items-center user-dropdown">
                                 <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                    @if(auth()->user()->hasRole('admin'))
+                                    @if(auth()->user()->Role('admin'))
                                         <span class="d-none d-md-inline"> Admin </span>
                                     @endif
                                 </a>

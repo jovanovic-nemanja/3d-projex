@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Reviews;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
@@ -34,7 +33,7 @@ class User extends Authenticatable
     	return $this->belongsToMany('App\Role');
     }
 
-    public function hasRole($role_name) {
+    public function Role($role_name) {
         foreach ($this->roles()->get() as $role)
         {
             if ($role->name == $role_name)
