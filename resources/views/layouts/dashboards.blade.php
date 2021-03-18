@@ -70,16 +70,15 @@
             <nav class="bottom-navbar">
                 <div class="container">
                     <ul class="nav page-navigation">
-                        <li class="nav-item <?= ($menu == 'vendor_create' || $menu == 'vendors' || $menu == 'discounts' || $menu == 'membership') ? "active" : "" ?>">
+                        <li class="nav-item <?= ($menu == 'models') ? "active" : "" ?>">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-shopping-cart menu-icon"></i>
-                                <span class="menu-title">Vendors</span>
+                                <span class="menu-title">Models</span>
                                 <i class="menu-arrow"></i></a>
                             <div class="submenu">
                                 <ul class="submenu-item">
-                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'vendor_create') ? "active" : "" ?>" href="{{ route('vendor.create') }}">Add New Vendor</a></li>
-                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'vendors') ? "active" : "" ?>" href="{{ route('vendor.index') }}">Manage Vendors</a></li>
-                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'discounts') ? "active" : "" ?>" href="{{ route('discounts.index') }}">Manage Discounts</a></li>
+                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'models') ? "active" : "" ?>" href="#">Add New Model</a></li>
+                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'models') ? "active" : "" ?>" href="#">Manage Models</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -92,19 +91,6 @@
                             <div class="submenu">
                                 <ul class="submenu-item">
                                     <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item <?= ($menu == 'create_category' || $menu == 'category') ? "active" : "" ?>">
-                            <a href="#" class="nav-link">
-                                <i class="icon-paper-clip menu-icon"></i>
-                                <span class="menu-title">Categories</span>
-                                <i class="menu-arrow"></i></a>
-                            <div class="submenu">
-                                <ul class="submenu-item">
-                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'create_category') ? "active" : "" ?>" href="{{ route('category.create') }}">Add New Category</a></li>
-                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'category') ? "active" : "" ?>" href="{{ route('category.index') }}">Manage Categories</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -122,27 +108,6 @@
                                 </ul>
                             </div>
                         </li>
-
-                        <li class="nav-item <?= ($menu == 'video') ? "active" : "" ?>">
-                            <a href="{{ route('video.index') }}" class="nav-link">
-                                <i class="fa fa-youtube-play"></i>&nbsp;
-                                <span class="menu-title">Video</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item <?= ($menu == 'reviews') ? "active" : "" ?>">
-                            <a href="{{ route('reviews.index') }}" class="nav-link">
-                                <i class="fa fa-comments"></i>&nbsp;
-                                <span class="menu-title">Reviews</span>
-                            </a>
-                        </li>
-
-                        <!-- <li class="nav-item <?= ($menu == 'membership') ? "active" : "" ?>">
-                            <a href="{{ route('video.index') }}" class="nav-link">
-                                <i class="fa fa-shopping-cart"></i>&nbsp;
-                                <span class="menu-title">Membership</span>
-                            </a>
-                        </li> -->
                     </ul>
                 </div>
             </nav>

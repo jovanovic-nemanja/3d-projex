@@ -9,9 +9,7 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     public function __construct(){
-
-        $this->middleware(['auth', 'admin']);
-
+        $this->middleware(['auth']);
     }
 
     /**
@@ -21,6 +19,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('vendor.index');
+        return view('frontend.home');
     }
 }

@@ -26,6 +26,18 @@ class UserSeeder extends Seeder
             'sign_date' => date('y-m-d h:m:s'),
 		]);
 
+        User::create([
+            'id'   => 2,
+            'username' => 'UserA',
+            'email' => 'user@gmail.com',
+            'email_verified_at' => 1,
+            'password' => '$2y$10$vyj9SUowNZ9tVQWs.dWqzu7B5FXiJBwPC.0cN/OMaotbk32k5hMFC', // aaaa1234!!!!
+            'birthday' => '1990-10-29',
+            'remember_token' => str_random(10),
+            'address' => 'Dubai 12',
+            'sign_date' => date('y-m-d h:m:s'),
+        ]);
+
         Role::create([
             'id' => 1,
             'name' => 'admin'
