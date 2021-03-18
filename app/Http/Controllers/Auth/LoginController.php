@@ -36,15 +36,15 @@ class LoginController extends Controller
     protected $redirectTo = '/admin';
 
     public function redirectTo(){
-      // User role Admin
-      if (auth()->user()->Role('admin')) {
-        return '/admin';
-      }
+        // User role Admin
+        if (auth()->user()->Role('admin')) {
+            return '/admin';
+        }
 
-      // User role User
-      if (auth()->user()->Role('user')) {
-        return '/';
-      }
+        // User role User
+        if (auth()->user()->Role('user')) {
+            // return '/';
+        }
     }
 
     /**

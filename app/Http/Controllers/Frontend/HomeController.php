@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        // $this->middleware(['auth', 'user']);
     }
 
     /**
@@ -19,6 +19,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!auth()->user()) {
+            return redirect()->route('login');
+        }
         return view('frontend.home');
     }
 }
