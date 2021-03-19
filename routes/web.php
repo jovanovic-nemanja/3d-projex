@@ -47,3 +47,8 @@ Route::put('/account/updatePassword', 'Frontend\AccountController@updatePassword
 
 Route::resource('admin/models', 'Admin\ModelsController');
 Route::get('/admin/models', 'Admin\ModelsController@index')->name('models.index');
+
+
+Route::resource('admin/wallpapers', 'Admin\WallpapersController');
+Route::get('/admin/wallpapers', 'Admin\WallpapersController@index')->name('wallpapers.index');
+Route::POST('/admin/wallpapers/storage', 'Admin\WallpapersController@storage')->name('wallpapers.storage');

@@ -30,10 +30,13 @@
               <span class="glyphicon glyphicon-chevron-right pull-right"></span>
             </a></li>
 
+            @if(auth()->user()->Role('admin'))
+            @else
             <li id="wallpaper_tab">
               <a href="#">Manage Wallpapers <span class="glyphicon glyphicon-chevron-right pull-right"></span>
               </a>
             </li>
+            @endif
           </ul>
 
           <!-- Context Menu -->
@@ -105,31 +108,17 @@
             <div class="panel panel-default">
               <div class="panel-heading">Adjust Wall</div>
               <div class="panel-body" style="color: #333333">
-                <div class="" style="padding: 3px">
-                  <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/uae.jpg') }}" texture-stretch="false" texture-scale="400">
-                    <img alt="Thumbnail marbletiles" src="{{ asset('3d/rooms/thumbnails/uae.jpg') }}" />
-                  </a>
-                </div>
-                <div class="" style="padding: 3px">
-                  <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/burjkalifatower.jpg') }}" texture-stretch="false" texture-scale="400">
-                    <img alt="Thumbnail marbletiles" src="{{ asset('3d/rooms/thumbnails/burjkalifatower.jpg') }}" />
-                  </a>
-                </div>
-                <div class="" style="padding: 3px">
-                  <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/marbletiles.jpg') }}" texture-stretch="false" texture-scale="300">
-                    <img alt="Thumbnail marbletiles" src="{{ asset('3d/rooms/thumbnails/thumbnail_marbletiles.jpg') }}" />
-                  </a>
-                </div>
-                <div class="" style="padding: 3px">
-                  <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/wallmap_yellow.png') }}" texture-stretch="true" texture-scale="">
-                    <img alt="Thumbnail wallmap yellow" src="{{ asset('3d/rooms/thumbnails/thumbnail_wallmap_yellow.png') }}" />
-                  </a>
-                </div>
-                <div class="" style="padding: 3px">
-                  <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('3d/rooms/textures/light_brick.jpg') }}" texture-stretch="false" texture-scale="100">
-                    <img alt="Thumbnail light brick" src="{{ asset('3d/rooms/thumbnails/thumbnail_light_brick.jpg') }}" />
-                  </a>
-                </div>
+                @if($wallpapers)
+                  @foreach($wallpapers as $wallpaper)
+                    <div class="" style="padding: 3px">
+                      <a href="#" class="thumbnail texture-select-thumbnail" texture-url="{{ asset('uploads/'.$wallpaper->texture_url) }}" texture-stretch="false" texture-scale="400">
+                        <img alt="Thumbnail marbletiles" src="{{ asset('uploads/'.$wallpaper->texture_url) }}" />
+                      </a>
+                    </div>
+                  @endforeach
+                @else
+                  <h4 style="text-align: center;">No Items</h4>
+                @endif
               </div>
             </div>
           </div>
@@ -137,34 +126,35 @@
 
         <!-- Right Column -->
         <div class="col-xs-10 main">
-
           <!-- 3D Viewer -->
           <div id="viewer">
-
             <div id="main-controls">
-              	<a href="#" class="btn btn-default btn-sm" id="new">
-              	  	New Plan
-              	</a>
-              	<a href="#" class="btn btn-default btn-sm" id="saveFile">
-              	  	Save Plan
-              	</a>
-              	<a class="btn btn-sm btn-default btn-file">
-              	 	<input type="file" class="hidden-input" id="loadFile">
-              	 	Load Plan
-              	</a>
-              	<a class="btn btn-sm btn-default btn-file screenshot">
-              	  	Screenshot
-              	</a>
+            	<a href="#" class="btn btn-default btn-sm" id="new">
+            	  	New Plan
+            	</a>
+            	<a href="#" class="btn btn-default btn-sm" id="saveFile">
+            	  	Save Plan
+            	</a>
+            	<a class="btn btn-sm btn-default btn-file">
+            	 	<input type="file" class="hidden-input" id="loadFile">
+            	 	Load Plan
+            	</a>
+            	<a class="btn btn-sm btn-default btn-file screenshot">
+            	  	Screenshot
+            	</a>
 
 	          	@guest
 	            @else
-	                <a class="btn btn-sm btn-danger dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-	                    <i class="dropdown-item-icon icon-power text-primary"></i>
-	                    {{ __('Logout') }}({{ Auth::user()->username }})
-	                </a>
-	                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-	                    @csrf
-	                </form>
+                @if(auth()->user()->Role('admin'))
+                  <a href="{{ route('dashboard.index') }}" class="btn btn-sm btn-success">Admin Dashboard</a>
+                @endif
+                <a class="btn btn-sm btn-danger dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <i class="dropdown-item-icon icon-power text-primary"></i>
+                  {{ __('Logout') }}({{ Auth::user()->username }})
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+                </form>
 	            @endguest
             </div>
 
@@ -301,7 +291,7 @@
             <br><br><br>
             <div class="row">
               <div class="col-md-1"></div>
-              <div class="col-md-10 table-responsive">
+              <div class="col-md-8 table-responsive">
                 <table id="order-listing" class="table">
                   <thead>
                     <td>ID</td>
@@ -310,9 +300,51 @@
                     <td>Created Date</td>
                   </thead>
                   <tbody>
-                    
+                    @if($wallpapers)
+                      @foreach($wallpapers as $wallpaper)
+                        <tr>
+                          <td>{{ $wallpaper->id }}</td>
+                          <td>
+                            <img src="{{ asset('uploads/'.$wallpaper->texture_url) }}" class="img-responsive" style="width: 5%;" />
+                          </td>
+                          <td>{{ App\User::getUsername($wallpaper->created_by) }}</td>
+                          <td>{{ $wallpaper->sign_date }}</td>
+                        </tr>
+                      @endforeach
+                    @else
+                    @endif
                   </tbody>
                 </table>
+              </div>
+
+              <div class="col-md-2">
+                <form action="{{ route('wallpapers.storage') }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+
+                  <div class="box">
+                    <div class="box-body">
+                      <div class="form-group {{ $errors->has('texture_url') ? 'has-error' : '' }}">
+                        <label>Wallpaper Image</label>
+                        <div class="controls">
+                          <span>
+                            <input type="file" name="texture_url" id="file" onchange="loadPreview(this, 'preview_img');" class="inputfile texture_url" required accept="image/*">
+                            <label for="file" @click="onClick" inputId="1" style="" id='preview_img'><i class="fa fa-plus-circle"></i></label>
+                          </span>
+                        </div>
+
+                        @if ($errors->has('texture_url'))
+                          <span class="help-block">
+                            <strong>{{ $errors->first('texture_url') }}</strong>
+                          </span>
+                        @endif
+                      </div>
+                    </div>
+
+                    <div class="box-footer">
+                      <button type="submit" class="btn btn-success pull-right">Save</button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

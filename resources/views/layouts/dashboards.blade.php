@@ -83,6 +83,19 @@
                             </div>
                         </li>
 
+                        <li class="nav-item <?= ($menu == 'wallpapers' || $menu == 'add_wallpaper') ? "active" : "" ?>">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-shopping-cart menu-icon"></i>
+                                <span class="menu-title">Wallpapers</span>
+                                <i class="menu-arrow"></i></a>
+                            <div class="submenu">
+                                <ul class="submenu-item">
+                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'add_wallpaper') ? "active" : "" ?>" href="{{ route('wallpapers.create') }}">Add New Wallpaper</a></li>
+                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'wallpapers') ? "active" : "" ?>" href="{{ route('wallpapers.index') }}">Manage Wallpapers</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
                         <li class="nav-item <?= ($menu == 'users') ? "active" : "" ?>">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-users menu-icon"></i>

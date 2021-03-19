@@ -59,7 +59,7 @@ class User extends Authenticatable
         return $result;
     }
 
-    public function getUsername($id) {
+    public static function getUsername($id) {
         if (@$id) {
             $user = User::where('id', $id)->first();
             $name = $user->username;
