@@ -41,3 +41,9 @@ Route::get('/account', 'Frontend\AccountController@index')->name('account');
 Route::get('/changepass', 'Frontend\AccountController@changepass')->name('changepass');
 Route::put('/account/update', 'Frontend\AccountController@update')->name('account.update');
 Route::put('/account/updatePassword', 'Frontend\AccountController@updatePassword')->name('account.updatePassword');
+
+
+
+
+Route::resource('admin/models', 'Admin\ModelsController');
+Route::get('/admin/models', 'Admin\ModelsController@index')->name('models.index');

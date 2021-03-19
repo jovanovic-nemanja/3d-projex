@@ -18,6 +18,7 @@ class CreateModelsTable extends Migration
 
             $table->text('name');
             $table->text('image');
+            $table->text('texture_image');
             $table->text('model');
             $table->integer('price');
             $table->integer('type');

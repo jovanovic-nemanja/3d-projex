@@ -24,7 +24,6 @@
                                     <th>No</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Photo</th>
                                     <th>Birthday</th>
                                     <th>Address</th>
                                     <th>Date</th>
@@ -37,15 +36,6 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <?php 
-                                        if(@$user->photo) {
-                                            $path = asset('uploads/') . "/" . $user->photo;
-                                        }else{
-                                            $path = "";
-                                        }
-                                    ?>
-                                    <td><img src="<?= $path ?>" style="border-radius: unset; height: unset;" /></td>
-                                    
                                     <td>{{ $user->birthday }}</td>
                                     <td>{{ $user->address }}</td>
                                     <td>{{ $user->sign_date }}</td>

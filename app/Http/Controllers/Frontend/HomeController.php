@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -22,6 +23,8 @@ class HomeController extends Controller
         if (!auth()->user()) {
             return redirect()->route('login');
         }
-        return view('frontend.home');
+
+        $models = Models::all();
+        return view('frontend.home', compact('models'));
     }
 }

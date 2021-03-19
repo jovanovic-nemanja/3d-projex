@@ -9,14 +9,6 @@
       "iDisplayLength": 10,
       "language": {
         search: ""
-      },
-      drawCallback: function (settings) {
-        $('.test_star').barrating({
-          theme: 'fontawesome-stars',
-          showSelectedRating: false,
-          hoverState: false,
-          readonly: true,
-        });
       }
     });
     $('#order-listing').each(function() {

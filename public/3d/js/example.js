@@ -220,7 +220,8 @@ var SideMenu = function(blueprint3d, floorplanControls, modalEffects) {
     "FLOORPLAN" : $("#floorplan_tab"),
     "SHOP" : $("#items_tab"),
     "DESIGN" : $("#design_tab"),
-    "CHECKOUT" : $("#checkout_tab")
+    "CHECKOUT" : $("#checkout_tab"),
+    "WALLPAPER" : $("#wallpaper_tab")
   }
 
   var scope = this;
@@ -242,6 +243,10 @@ var SideMenu = function(blueprint3d, floorplanControls, modalEffects) {
     "CHECKOUT" : {
       "div" : $("#add-checkout"),
       "tab" : tabs.CHECKOUT
+    },
+    "WALLPAPER" : {
+      "div" : $("#manage_wallpapers"),
+      "tab" : tabs.WALLPAPER
     }
   }
 
@@ -338,6 +343,7 @@ var SideMenu = function(blueprint3d, floorplanControls, modalEffects) {
   function handleWindowResize() {
     $(".sidebar").height(window.innerHeight);
     $("#add-items").height(window.innerHeight);
+    $("#manage_wallpapers").height(window.innerHeight);
   };
 
   // TODO: this doesn't really belong here

@@ -29,6 +29,11 @@
               Checkouts
               <span class="glyphicon glyphicon-chevron-right pull-right"></span>
             </a></li>
+
+            <li id="wallpaper_tab">
+              <a href="#">Manage Wallpapers <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+              </a>
+            </li>
           </ul>
 
           <!-- Context Menu -->
@@ -246,41 +251,17 @@
           <!-- Add Items -->
           <div id="add-items">
             <div class="row" id="items-wrapper">
-            	<div class="col-sm-4">
-            		<a class="thumbnail add-item" model-name="Bar Stool" model-url="{{ asset('3d/models/js/chair_1-2.js') }}" model-type="1" model-price="1000" model-image="{{ asset('3d/models/thumbnails/chair-red.png') }}">
-            			<img class="add_model" src="{{ asset('3d/models/thumbnails/chair-red.png') }}" alt="Add Item">Bar Stool&nbsp; /&nbsp;  AED
-        			</a>
-            	</div>
-
-            	<div class="col-sm-4">
-            		<a class="thumbnail add-item" model-name="TV" model-url="{{ asset('3d/models/js/led_1-2.js') }}" model-type="2" model-price="2000" model-image="{{ asset('3d/models/thumbnails/TV.png') }}">
-            			<img class="add_model" src="{{ asset('3d/models/thumbnails/TV.png') }}" alt="Add Item">TV&nbsp; /&nbsp; 2000 AED
-        			</a>
-            	</div>
-
-            	<div class="col-sm-4">
-            		<a class="thumbnail add-item" model-name="Round Table" model-url="{{ asset('3d/models/js/table_round.js') }}" model-type="1" model-price="500" model-image="{{ asset('3d/models/thumbnails/roundtable.png') }}">
-            			<img class="add_model" src="{{ asset('3d/models/thumbnails/roundtable.png') }}" alt="Add Item">Round Table&nbsp; /&nbsp; 500 AED
-        			</a>
-            	</div>
-
-            	<div class="col-sm-4">
-            		<a class="thumbnail add-item" model-name="Box" model-url="{{ asset('3d/models/js/table4_1-2.js') }}" model-type="1" model-price="3000" model-image="{{ asset('3d/models/thumbnails/box.png') }}">
-            			<img class="add_model" src="{{ asset('3d/models/thumbnails/box.png') }}" alt="Add Item">Box&nbsp; /&nbsp; 3000 AED
-        			</a>
-            	</div>
-
-            	<div class="col-sm-4">
-            		<a class="thumbnail add-item" model-name="Structure" model-url="{{ asset('3d/models/js/structure.js') }}" model-type="2" model-price="3300" model-image="{{ asset('3d/models/thumbnails/structure.png') }}">
-            			<img class="add_model" src="{{ asset('3d/models/thumbnails/structure.png') }}" alt="Add Item">Structure&nbsp; /&nbsp; 3300 AED
-        			</a>
-            	</div>
-
-            	<div class="col-sm-4">
-            		<a class="thumbnail add-item" model-name="Wall Closet" model-url="{{ asset('3d/models/js/cobord.js') }}" model-type="1" model-price="5000" model-image="{{ asset('3d/models/thumbnails/wallpaper.png') }}">
-            			<img class="add_model" src="{{ asset('3d/models/thumbnails/wallpaper.png') }}" alt="Add Item">Wall Closet&nbsp; /&nbsp; 5000 AED
-        			</a>
-            	</div>
+              @if(count($models) > 0)
+                @foreach($models as $model)
+                  <div class="col-sm-4">
+                    <a class="thumbnail add-item" model-name="{{ $model->name }}" model-url="{{ asset('uploads/'.$model->model) }}" model-type="{{ $model->type }}" model-price="{{ $model->price }}" model-image="{{ asset('uploads/'.$model->image) }}">
+                      <img class="add_model" src="{{ asset('uploads/'.$model->image) }}" alt="Add Item">{{ $model->name }}&nbsp; /&nbsp; {{ $model->price }} AED
+                    </a>
+                  </div>    
+                @endforeach
+              @else
+                <h4 style="text-align: center;">No Items</h4>
+              @endif
             </div>
           </div>
           <!-- end items -->
@@ -314,6 +295,29 @@
             </div>
           </div>
           <!-- end check out -->
+
+          <!-- start wallpapers section -->
+          <div id="manage_wallpapers">
+            <br><br><br>
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-10 table-responsive">
+                <table id="order-listing" class="table">
+                  <thead>
+                    <td>ID</td>
+                    <td>Photo</td>
+                    <td>Created By</td>
+                    <td>Created Date</td>
+                  </thead>
+                  <tbody>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- end wallpapers section -->
+
         </div>
         <!-- End Right Column -->
       </div>

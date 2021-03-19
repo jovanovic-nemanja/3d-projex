@@ -37,7 +37,7 @@
                         <a class="navbar-brand brand-logo" href="{{ route('home') }}" referrerpolicy="origin"><img style="height: 75px!important;" src="{{ asset('images/logo1.png') }}" alt="logo"/></a>
 
                         <!-- mobile logo -->
-                         <a class="navbar-brand brand-logo-mini" href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt="logo"/></a>
+                         <a class="navbar-brand brand-logo-mini" href="{{ route('home') }}"><img src="{{ asset('images/logo1.png') }}" alt="logo"/></a>
                     </div>
                     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                         <ul class="navbar-nav navbar-nav-right">
@@ -70,15 +70,15 @@
             <nav class="bottom-navbar">
                 <div class="container">
                     <ul class="nav page-navigation">
-                        <li class="nav-item <?= ($menu == 'models') ? "active" : "" ?>">
+                        <li class="nav-item <?= ($menu == 'models' || $menu == 'add_model') ? "active" : "" ?>">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-shopping-cart menu-icon"></i>
                                 <span class="menu-title">Models</span>
                                 <i class="menu-arrow"></i></a>
                             <div class="submenu">
                                 <ul class="submenu-item">
-                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'models') ? "active" : "" ?>" href="#">Add New Model</a></li>
-                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'models') ? "active" : "" ?>" href="#">Manage Models</a></li>
+                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'add_model') ? "active" : "" ?>" href="{{ route('models.create') }}">Add New Model</a></li>
+                                    <li class="nav-item"><a class="nav-link <?= ($menu == 'models') ? "active" : "" ?>" href="{{ route('models.index') }}">Manage Models</a></li>
                                 </ul>
                             </div>
                         </li>

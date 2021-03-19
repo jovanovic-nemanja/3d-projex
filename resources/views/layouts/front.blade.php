@@ -12,6 +12,8 @@
 
     <link href="{{ asset('3d/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('3d/css/example.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('demo_admin_assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
 </head>
 <body>
     <div class="container-scroller">
@@ -31,6 +33,12 @@
     <script src="{{ asset('3d/js/jquery.js') }}"></script>
     <script src="{{ asset('3d/js/bootstrap.js') }}"></script>
     <script src="{{ asset('3d/js/example.js') }}"></script>
+
+
+    <script src="{{ asset('demo_admin_assets/vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ asset('demo_admin_assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('demo_admin_assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('demo_admin_assets/js/data-table.js') }}"></script>
 
     @yield('script')
 </body>
