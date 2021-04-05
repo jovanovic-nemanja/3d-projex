@@ -129,22 +129,22 @@
           <!-- 3D Viewer -->
           <div id="viewer">
             <div id="main-controls">
-            	<a href="#" class="btn btn-default btn-sm" id="new">
-            	  	New Plan
-            	</a>
-            	<a href="#" class="btn btn-default btn-sm" id="saveFile">
-            	  	Save Plan
-            	</a>
-            	<a class="btn btn-sm btn-default btn-file">
-            	 	<input type="file" class="hidden-input" id="loadFile">
-            	 	Load Plan
-            	</a>
-            	<a class="btn btn-sm btn-default btn-file screenshot">
-            	  	Screenshot
-            	</a>
+              <a href="#" class="btn btn-default btn-sm" id="new">
+                  New Plan
+              </a>
+              <a href="#" class="btn btn-default btn-sm" id="saveFile">
+                  Save Plan
+              </a>
+              <a class="btn btn-sm btn-default btn-file">
+                <input type="file" class="hidden-input" id="loadFile">
+                Load Plan
+              </a>
+              <a class="btn btn-sm btn-default btn-file screenshot">
+                  Screenshot
+              </a>
 
-	          	@guest
-	            @else
+              @guest
+              @else
                 @if(auth()->user()->Role('admin'))
                   <a href="{{ route('dashboard.index') }}" class="btn btn-sm btn-success">Admin Dashboard</a>
                 @endif
@@ -155,7 +155,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
                 </form>
-	            @endguest
+              @endguest
             </div>
 
             <div id="right_top_panel">
@@ -277,10 +277,22 @@
                 <div class="row">
                   <div class="col-md-6"></div>
                   <div class="col-md-6 alignRight">
+                    <button class="btn btn-success inline-flex paywithpaypal">Pay with Paypal</button>
                     <button class="btn btn-primary inline-flex exportCSV">Export CSV</button>
                     <h4 class="total_price_checkout inline-flex"><span class="checkout_price">0 </span> AED</h4>
                   </div>
                 </div>                
+              </div>
+              <div>
+                <form class="w3-container w3-display-middle w3-card-4 w3-padding-16" method="POST" id="payment-form" action="{!! URL::to('paymentrequest') !!}" style="display: none;">
+                 <div class="w3-container w3-teal w3-padding-16">Paywith Paypal</div>
+                 {{ csrf_field() }}
+                 <h2 class="w3-text-blue">Payment Form</h2>
+                 <p>Demo PayPal form - Integrating paypal in laravel</p>
+                 <label class="w3-text-blue"><b>Enter Amount</b></label>
+                 <input class="w3-input w3-border" id="amount" type="text" name="amount"></p>
+                 <button class="w3-btn w3-blue paymentrequest">Pay with PayPal</button>
+                </form>
               </div>
             </div>
           </div>

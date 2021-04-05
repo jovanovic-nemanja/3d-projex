@@ -52,3 +52,12 @@ Route::get('/admin/models', 'Admin\ModelsController@index')->name('models.index'
 Route::resource('admin/wallpapers', 'Admin\WallpapersController');
 Route::get('/admin/wallpapers', 'Admin\WallpapersController@index')->name('wallpapers.index');
 Route::POST('/admin/wallpapers/storage', 'Admin\WallpapersController@storage')->name('wallpapers.storage');
+
+
+
+// paypal
+Route::get('/paymentrequest', 'PaymentController@index');
+// route for processing payment
+Route::post('paymentrequest', 'PaymentController@payWithpaypal');
+// route for check status of the payment
+Route::get('paymentstatus', 'PaymentController@getPaymentStatus');
