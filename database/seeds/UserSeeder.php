@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
         ]);
 
         RoleUser::create([
-            'id' => 1,
+            'id' => 2,
             'user_id' => 2,
             'role_id' => 2,
         ]);
