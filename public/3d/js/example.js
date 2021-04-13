@@ -534,7 +534,7 @@ var TextureSelector = function (blueprint3d, sideMenu) {
   function floorClicked(room) {
     currentTarget = room;
     $("#wallTextures").hide();  
-    $("#floorTexturesDiv").show();  
+    $("#floorTexturesDiv").hide();  
   }
 
   function reset() {

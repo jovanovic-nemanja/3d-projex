@@ -1431,7 +1431,7 @@ var BP3D;
     (function (Model) {
         /** Default texture to be used if nothing is provided. */
         var defaultRoomTexture = {
-            url: "3d/rooms/textures/hardwood.png",
+            url: "3d/rooms/textures/greenfloor.png",
             scale: 400
         };
         /**
