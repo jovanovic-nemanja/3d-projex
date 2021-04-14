@@ -108,6 +108,18 @@
                             </div>
                         </li>
 
+                        <li class="nav-item <?= ($menu == 'orders') ? "active" : "" ?>">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-users menu-icon"></i>
+                                <span class="menu-title">Orders</span>
+                                <i class="menu-arrow"></i></a>
+                            <div class="submenu">
+                                <ul class="submenu-item">
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('orderlists.index') }}">Manage Orders</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
                         <li class="nav-item <?= ($menu == 'local_settings' || $menu == 'general_settings') ? "active" : "" ?>">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-briefcase menu-icon"></i>

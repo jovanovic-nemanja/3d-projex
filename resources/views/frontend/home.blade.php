@@ -277,7 +277,8 @@
                 <div class="row">
                   <div class="col-md-6"></div>
                   <div class="col-md-6 alignRight">
-                    <button class="btn btn-success inline-flex paywithpaypal">Pay with Paypal</button>
+                    <button class="btn btn-success inline-flex checkoutwithBackend">Checkout</button>
+                    <!-- <button class="btn btn-success inline-flex paywithpaypal">Checkout</button> -->
                     <button class="btn btn-primary inline-flex exportCSV">Export CSV</button>
                     <h4 class="total_price_checkout inline-flex"><span class="checkout_price">0 </span> AED</h4>
                   </div>

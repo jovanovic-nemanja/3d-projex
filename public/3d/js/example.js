@@ -698,7 +698,59 @@ $(document).ready(function() {
       $('#amount').val(parseInt(price));
       $('.paymentrequest').click();  
     }
-  })
+  });
+
+  $('.checkoutwithBackend').click(function() {
+    if (arr_items) {
+      var checking_num = Math.floor(Math.random() * 100000000);
+
+      for(var i=0; i<arr_items.length; i++) {
+        var formData = new FormData();
+        formData.append("model_name", arr_items[i].itemName);
+        formData.append("model_price", arr_items[i].itemPrice);
+        formData.append("model_photo", arr_items[i].itemPhoto);
+        formData.append("order_count", arr_items[i].itemCount);
+        formData.append("total_price", parseInt(price));
+        formData.append("checking_num", parseInt(checking_num));
+
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+
+        $.ajax({
+          url: "/savecheckout",
+          type: 'POST',
+          contentType: false,
+          cache: false,
+          processData: false,
+          data: formData,
+          success: function(result, status) {
+            var mes = result;
+            var title = 'Your Order';
+            toastr.options = {
+              "closeButton": true,
+              "debug": false,
+              "newestOnTop": false,
+              "progressBar": false,
+              "positionClass": "toast-top-right",
+              "onclick": null,
+              "showDuration": "3000",
+              "hideDuration": "1000",
+              "timeOut": "1000",
+              "extendedTimeOut": "1000",
+            };
+
+            toastr.success(mes, title); //info, success, warning, error
+          }
+        });
+      }
+
+      checking_num = '';
+    }
+    
+  });
 
   // This serialization format needs work
   // Load a simple rectangle room

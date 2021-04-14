@@ -61,3 +61,10 @@ Route::get('/paymentrequest', 'PaymentController@index');
 Route::post('paymentrequest', 'PaymentController@payWithpaypal');
 // route for check status of the payment
 Route::get('paymentstatus', 'PaymentController@getPaymentStatus');
+
+
+Route::post('/savecheckout', 'Admin\OrderlistController@Savecheckout');
+
+
+Route::resource('admin/orderlists', 'Admin\OrderlistController');
+Route::get('/admin/orderlists', 'Admin\OrderlistController@index')->name('orderlists.index');
