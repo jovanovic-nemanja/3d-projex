@@ -1,4 +1,3 @@
-{{--@extends('adminlte::login')--}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,6 +86,8 @@
                             </div>
                         </form>
                         <button type="button" class="btn btn-block btn-success btn-lg font-weight-medium auth-form-btn btn-login">LOGIN</button>
+
+                        <a href="{{ route('register') }}" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn btn-login">Register</a>
                     </div>
                 </div>
                 <div class="col-lg-6 login-half-bg d-flex flex-row">

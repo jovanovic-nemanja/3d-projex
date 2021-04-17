@@ -1,140 +1,207 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+<!-- Mirrored from www.bootstrapdash.com/demo/purple/jquery/pages/samples/login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Dec 2018 11:54:49 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{ $general_setting->site_name }}</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{{ asset('admin_assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/vendors/css/vendor.bundle.addons.css') }}">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/style.css') }}">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
 
-<div class="ps-page--my-account">
-    <div class="ps-my-account">
-        <div class="container">
-            <div class="ps-form--account-padding"></div>
-            <form class="ps-form--account ps-tab-root" enctype="multipart/form-data" action="{{ url(config('adminlte.register_url', 'register')) }}" method="POST" style="border: 1px solid;">
-                <ul class="ps-tab-list">
-                    <li class="active"><a href="#sign-in">Join as Buyer</a></li>
-                </ul>
-                <div class="ps-tabs">
-                    <div class="ps-tab active" id="sign-in">
-                        <div class="ps-form__content">
-                            <h5>Join as Buyer</h5>
-                            {!! csrf_field() !!}
+    <style type="text/css">
+        .auth .login-half-bg {
+            background: url({{ asset('images/logo2.png') }});
+            background-size: cover;
+            background-position: center;
+        }
+        .content-wrapper {
+            background: #ecf0f4;
+        }
+    </style>
+</head>
 
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg"  style="margin-top: 0px!important;">
+            <div class="row flex-grow">
+                <div class="col-lg-6 login-half-bg d-flex flex-row">
+                    <?php
+                    $date = getdate();
+                    $year = $date['year'];
+                    ?>
+                    <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; <?= $year; ?> All rights reserved.</p>
+                </div>
+
+                <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                    <div class="auth-form-transparent text-left p-3">
+                        <?php if(@$msg) { ?>
+                            <div class="alert alert-danger">
+                                {{ $msg }}
+                            </div>
+                        <?php } ?>
+                        <div class="brand-logo">
+                            <img src="{{ asset('images/logo1.png') }}" alt="logo">
+                        </div>
+                        <h4>Welcome!</h4>
+                        <h6 class="font-weight-light">Happy to see you again!</h6>
+                        <form class="pt-3" action="{{ url(config('adminlte.register_url', 'register')) }}" method="post">
                             <div class="form-group">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email*" value="{{ $useremail }}" required readonly>
-                                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                {!! csrf_field() !!}
+                                <label for="exampleInputEmail">Email</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend bg-transparent">
+                                      <span class="input-group-text bg-transparent border-right-0">
+                                        <i class="mdi mdi-account-outline text-success"></i>
+                                      </span>
+                                    </div>
+                                    <input type="email" class="form-control form-control-lg border-left-0 email" name="email" id="email" placeholder="Email">
+                                </div>
                             </div>
-                            <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name*" value="{{ old('name') }}" required>
-                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="form-group">
+                                <label for="Userame">Userame</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend bg-transparent">
+                                        <span class="input-group-text bg-transparent border-right-0">
+                                            <i class="mdi mdi-account-outline text-success"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-lg border-left-0 username" name="username" id="username" placeholder="Userame">
+                                </div>
                             </div>
-                            <input type="hidden" name="role" id="role" value="2" />
-
-                            <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}">
-                                <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" value="{{ old('company_name') }}">
-                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                @if ($errors->has('company_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('company_name') }}</strong>
-
-                                    </span>
-                                @endif
+                            <div class="form-group">
+                                <label for="birthday">Birthday</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend bg-transparent">
+                                        <span class="input-group-text bg-transparent border-right-0">
+                                            <i class="mdi mdi-account-outline text-success"></i>
+                                        </span>
+                                    </div>
+                                    <input type="date" class="form-control form-control-lg border-left-0 birthday" name="birthday" id="birthday" placeholder="Birthday">
+                                </div>
                             </div>
-
-                            <div class="form-group {{ $errors->has('phone_number') ? 'has-error' : '' }}">
-                                <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Phone number*" value="{{ old('phone_number') }}">
-                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                @if ($errors->has('phone_number'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('phone_number') }}</strong>
-
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="form-group u-form-email u-form-group u-form-group-2">
-                                <label for="name" class="col-sm-2 col-form-label">{{ __('Company Logo') }}</label>
-                                <div class="col-md-10">
-                                    <span>
-                                        <input type="file" name="company_logo" id="file" onchange="loadPreview(this, 'preview_img');" class="inputfile">
-                                        <label for="file" @click="onClick" inputId="1" style="" id='preview_img'><i class="fa fa-plus-circle"></i></label>
-                                    </span>
+                            <div class="form-group">
+                                <label for="Address">Address</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend bg-transparent">
+                                        <span class="input-group-text bg-transparent border-right-0">
+                                            <i class="mdi mdi-account-outline text-success"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-lg border-left-0 address" name="address" id="address" placeholder="Address">
                                 </div>
                             </div>
 
-                            <div class="form-group submtit">
-                                <button class="ps-btn ps-btn--fullwidth">Join now</button>
+                            <div class="form-group">
+                                <label for="exampleInputPassword">Password</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend bg-transparent">
+                                      <span class="input-group-text bg-transparent border-right-0">
+                                        <i class="mdi mdi-lock-outline text-success"></i>
+                                      </span>
+                                    </div>
+                                    <input type="password" class="form-control form-control-lg border-left-0 password" name="password" id="exampleInputPassword" placeholder="Password">
+                                </div>
                             </div>
-                        </div>
-                        <div class="ps-form__footer">
-                            <p class="u-text u-text-2">Already have an account?&nbsp;
-                                <a href="{{ url(config('adminlte.login_url', 'login')) }}" class="ml-2 u-btn u-button-style u-none u-text-palette-1-base u-btn-2">Login</a>
-                            </p>
-                        </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword">Confirmation Password</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend bg-transparent">
+                                      <span class="input-group-text bg-transparent border-right-0">
+                                        <i class="mdi mdi-lock-outline text-success"></i>
+                                      </span>
+                                    </div>
+                                    <input type="password" class="form-control form-control-lg border-left-0 confirmation_password" name="confirmation_password" id="exampleInputPassword" placeholder="Confirmation Password">
+                                </div>
+                            </div>
+
+                            <div class="my-2 d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <label class="form-check-label text-muted">
+                                        <input type="checkbox" class="form-check-input">
+                                        Rememeber me
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="my-3">
+                                <button type="submit" class="btn-lock" style="display: none;">Register</button>
+                            </div>
+                        </form>
+                        <button type="button" class="btn btn-block btn-success btn-lg font-weight-medium auth-form-btn btn-register">Register</button>
+
+                        <a href="{{ route('login') }}" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn btn-login">Login</a>
                     </div>
                 </div>
-            </form>
-            <div style="padding-bottom: 130px;"></div>
+            </div>
         </div>
+        <!-- content-wrapper ends -->
     </div>
+    <!-- page-body-wrapper ends -->
 </div>
-@stop
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script src="{{ asset('admin_assets/vendors/js/vendor.bundle.base.js') }}"></script>
+<script src="{{ asset('admin_assets/vendors/js/vendor.bundle.addons.js') }}"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="{{ asset('admin_assets/js/off-canvas.js') }}"></script>
+<script src="{{ asset('admin_assets/js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('admin_assets/js/misc.js') }}"></script>
+<script src="{{ asset('admin_assets/js/settings.js') }}"></script>
+<script src="{{ asset('admin_assets/js/todolist.js') }}"></script>
 
-@section('adminlte_js')
-    @yield('js')
-@stop
-
-<style>
-    .inputfile {
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1;
-    }
-
-    .inputfile + label {
-        font-size: 1.25em;
-        font-weight: 700;
-        color: white;
-        background-color: #E9ECEF;
-        padding: 50px;
-        display: inline-block;
-        cursor: pointer;
-        background-size: cover;
-    }
-
-    .inputfile:focus + label,
-    .inputfile + label:hover {
-        background-color: #38C172ed;
-    }
-
-    .hidden {
-        display: none !important;
-    }
-</style>
-
-@section('script')
 <script>
-    function loadPreview(input, id) {
-        id = "#" + id;
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
+    $(document).ready(function() {
+        $('.btn-register').click(function() {
+            var email = $('.email').val();
+            var password = $('.password').val();
+            if(!email) {
+                $.toast({
+                    heading: 'Required Field',
+                    text: 'The Email field cannot be blank.',
+                    position: "top-right",
+                    icon: 'success',
+                    stack: false,
+                    loaderBg: '#46c35f'
+                });
+            }else if(!password) {
+                $.toast({
+                    heading: 'Required Field',
+                    text: 'The Password field cannot be blank.',
+                    position: "top-right",
+                    icon: 'success',
+                    stack: false,
+                    loaderBg: '#46c35f'
+                });
+            }else if(!email && !password){
+                $.toast({
+                    heading: 'Required Fields',
+                    text: 'The Email and Password fields cannot be blank.',
+                    position: "top-right",
+                    icon: 'success',
+                    stack: false,
+                    loaderBg: '#46c35f'
+                });
+            }else{
+                $('.btn-lock').click();
+            }
+        });
+    });
 
-          reader.onload = function (e) {
-            var path = "background-image: " + "url('" + e.target.result + "')";
-            $(id).attr('style', path);
-          };
-
-          reader.readAsDataURL(input.files[0]);
-        }
-    }
 </script>
-@endsection
+<!-- endinject -->
+</body>
+</html>
+@stop

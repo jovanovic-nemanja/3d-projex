@@ -7,7 +7,6 @@ use Session;
 use App\User;
 use App\Role;
 use App\RoleUser;
-use App\VerifyEmailcodes;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -57,10 +56,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            // 'password' => 'required|string|min:6|confirmed',
-            'phone_number' => 'string|max:255',
+            'password' => 'required|string|min:6|confirmed'
         ]);
     }
 
@@ -72,46 +70,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if(!@$data['role']) {
-            return false;
-        }else{
-            if($data['role'] == 1) {    //seller
-                $role = 2;
-            }else if($data['role'] == 2) {    //buyer
-                $role = 3;
-            }else{
+        DB::beginTransaction();
 
-            }
+        try {
+            $user = User::create([
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'birthday' => @$data['birthday'],
+                'address' => @$data['address'],
+                'sign_date' => date('Y-m-d h:i:s'),
+            ]);
 
-            $verify = VerifyEmailcodes::where('email', $data['email'])->first();
-            $data['password'] = $verify->password;
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => 2,
+            ]);
 
-            DB::beginTransaction();
+            DB::commit();
+            
+            return $user;
+        } catch (\Exception $e) {
+            DB::rollback();
 
-            try {
-                $user = User::create([
-                    'name' => $data['name'],
-                    'company_name' => $data['company_name'],
-                    'company_logo' => @$data['company_logo'],
-                    'email' => $data['email'],
-                    'block' => 0,
-                    'password' => Hash::make($data['password']),
-                    'phone_number' => @$data['phone_number'],
-                    'sign_date' => date('Y-m-d h:i:s'),
-                ]);
-
-                Image::upload_logo_img($user->id);
-
-                RoleUser::create([
-                    'user_id' => $user->id,
-                    'role_id' => $role,
-                ]);
-                DB::commit();
-                return $user;
-            } catch (\Exception $e) {
-                DB::rollback();
-                throw $e;
-            }
+            throw $e;
         }
     }
 }
