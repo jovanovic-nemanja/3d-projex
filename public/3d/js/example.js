@@ -341,9 +341,9 @@ var SideMenu = function(blueprint3d, floorplanControls, modalEffects) {
   }
 
   function handleWindowResize() {
-    $(".sidebar").height(window.innerHeight);
-    $("#add-items").height(window.innerHeight);
-    $("#manage_wallpapers").height(window.innerHeight);
+    // $(".sidebar").height(window.innerHeight);
+    // $("#add-items").height(window.innerHeight);
+    // $("#manage_wallpapers").height(window.innerHeight);
   };
 
   // TODO: this doesn't really belong here
@@ -457,7 +457,7 @@ function checkout() {
   $('.checkout_price').text(0);
   $('.checkout_price').text(formatNumbertoNew(price));
 
-  $("#add-checkout").height(window.innerHeight - parseInt(50));
+  // $("#add-checkout").height(window.innerHeight - parseInt(50));
 }
 
 function ExportCSV() {
@@ -656,11 +656,13 @@ var mainControls = function(blueprint3d) {
  * Initialize!
  */
 $(document).resize(function() {
-  $("#add-checkout").height(window.innerHeight - parseInt(50));
+  // $("#add-checkout").height(window.innerHeight - parseInt(50));
 });
 
 $(document).ready(function() {
+  $('.box-successscreen').hide();
   $('.checkout').hide();
+  $('#manage_wallpapers').hide();
 
   // main setup
   var opts = {
@@ -698,58 +700,6 @@ $(document).ready(function() {
       $('#amount').val(parseInt(price));
       $('.paymentrequest').click();  
     }
-  });
-
-  $('.checkoutwithBackend').click(function() {
-    if (arr_items) {
-      var checking_num = Math.floor(Math.random() * 100000000);
-
-      for(var i=0; i<arr_items.length; i++) {
-        var formData = new FormData();
-        formData.append("model_name", arr_items[i].itemName);
-        formData.append("model_price", arr_items[i].itemPrice);
-        formData.append("model_photo", arr_items[i].itemPhoto);
-        formData.append("order_count", arr_items[i].itemCount);
-        formData.append("total_price", parseInt(price));
-        formData.append("checking_num", parseInt(checking_num));
-
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-
-        $.ajax({
-          url: "/savecheckout",
-          type: 'POST',
-          contentType: false,
-          cache: false,
-          processData: false,
-          data: formData,
-          success: function(result, status) {
-            var mes = result;
-            var title = 'Your Order';
-            toastr.options = {
-              "closeButton": true,
-              "debug": false,
-              "newestOnTop": false,
-              "progressBar": false,
-              "positionClass": "toast-top-right",
-              "onclick": null,
-              "showDuration": "3000",
-              "hideDuration": "1000",
-              "timeOut": "1000",
-              "extendedTimeOut": "1000",
-            };
-
-            toastr.success(mes, title); //info, success, warning, error
-          }
-        });
-      }
-
-      checking_num = '';
-    }
-    
   });
 
   // This serialization format needs work

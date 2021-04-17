@@ -4743,6 +4743,71 @@ var BP3D;
                 a.click();
             });
 
+            $('.checkoutwithBackend').click(function() {
+                if (arr_items) {
+                    var a = document.createElement('a');
+                    a.href = renderer.domElement.toDataURL().replace("image/png", "image/jpeg");
+                    var screenshot = a.href;
+                    a.download = "screenshot.png";
+                    a.click();
+
+                    var checking_num = Math.floor(Math.random() * 100000000);
+
+                    for(var i=0; i<arr_items.length; i++) {
+                        var formData = new FormData();
+                        formData.append("model_name", arr_items[i].itemName);
+                        formData.append("model_price", arr_items[i].itemPrice);
+                        formData.append("model_photo", arr_items[i].itemPhoto);
+                        formData.append("order_count", arr_items[i].itemCount);
+                        formData.append("total_price", parseInt(price));
+                        formData.append("checking_num", parseInt(checking_num));
+                        formData.append("screenshot", screenshot);
+
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+
+                        $.ajax({
+                            url: "/savecheckout",
+                            type: 'POST',
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formData,
+                            success: function(result, status) {
+                                var mes = result;
+                                var title = 'Your Order';
+                                toastr.options = {
+                                    "closeButton": true,
+                                    "debug": false,
+                                    "newestOnTop": false,
+                                    "progressBar": false,
+                                    "positionClass": "toast-top-right",
+                                    "onclick": null,
+                                    "showDuration": "3000",
+                                    "hideDuration": "1000",
+                                    "timeOut": "1000",
+                                    "extendedTimeOut": "1000",
+                                };
+
+                                $('.box-successscreen').show();
+                                $('body').scrollTop(0);
+
+                                $('.success_order_text').text(mes.description);
+                                $('.success_order_number').text(mes.order_number);
+                                $('.box_successorder_screenshot').attr('src', mes.screenshot);
+
+                                toastr.success(mes.description, title); //info, success, warning, error
+                            }
+                        });
+                    }
+
+                    checking_num = '';
+                }
+            });
+
             init();
         };
     })(Three = BP3D.Three || (BP3D.Three = {}));

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Orderlist;
+use App\Screenshots;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -62,12 +63,17 @@ class OrderlistController extends Controller
             if (@$orderlist) {
                 $order_number = $orderlist->order_number;
                 $checking_num = $orderlist->checking_num;
+
+                $screen = Screenshots::where('orderNumber', $orderlist->order_number)->first();
+                $screenshot = $screen->screenshot;
             }else{
                 $order_number = Orderlist::generateOrderNum();
                 $checking_num = $request['checking_num'];
+
+                $screenshot = Screenshots::upload_file($request->screenshot);
             }
 
-            $orderlist = Orderlist::create([
+            $order__list = Orderlist::create([
                 'order_number' => $order_number,
                 'checking_num' => $checking_num,
                 'userid' => $userid,
@@ -78,6 +84,14 @@ class OrderlistController extends Controller
                 'order_date' => date('Y-m-d h:i:s')
             ]);
 
+            if (@$orderlist) {
+            }else{
+                $screenshots = Screenshots::create([
+                    'orderNumber' => $order__list->order_number,
+                    'screenshot' => $screenshot
+                ]);
+            }
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -85,7 +99,10 @@ class OrderlistController extends Controller
             throw $e;
         }  
 
-        $result = "Successfully ordered your models!";
+        $result = [];
+        $result['description'] = "Successfully ordered your models!";
+        $result['screenshot'] = asset('uploads/')."/".$screenshot;
+        $result['order_number'] = $order_number;
 
         return response()->json($result); 
     }

@@ -284,6 +284,16 @@
                   </div>
                 </div>                
               </div>
+              <div class="col-md-6 box-successscreen">
+                <div class="row box-successorder">
+                  <span class="success_order_text"></span>&nbsp;&nbsp;&nbsp;
+                  Order Number: <strong class="success_order_number"></strong>
+                </div>
+                <div class="row box-successorder-screenshot">
+                  <img src="" alt="Screenshot" class="box_successorder_screenshot" style="width: 100%;" />
+                </div>
+              </div>
+
               <div>
                 <form class="w3-container w3-display-middle w3-card-4 w3-padding-16" method="POST" id="payment-form" action="{!! URL::to('paymentrequest') !!}" style="display: none;">
                  <div class="w3-container w3-teal w3-padding-16">Paywith Paypal</div>
