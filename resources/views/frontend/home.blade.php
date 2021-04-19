@@ -262,11 +262,11 @@
               <div class="col-md-6">
                 <table class="form-control table table-scroll">
                   <thead>
-                    <td>ID</td>
-                    <td>Name</td>
-                    <td>Count</td>
-                    <td>Price</td>
-                    <td>All Price</td>
+                    <td width="10%">ID</td>
+                    <td width="40%">Name</td>
+                    <td width="20%">Count</td>
+                    <td width="20%">Price</td>
+                    <td width="20%">All Price</td>
                   </thead>
                   <tbody id="checkout_tbody">
                     
@@ -276,7 +276,7 @@
                 <div class="row">
                   <div class="col-md-6"></div>
                   <div class="col-md-6 alignRight">
-                    <button class="btn btn-success inline-flex checkoutwithBackend">Checkout</button>
+                    <button class="btn btn-success inline-flex checkoutwithBackend">Order Placed</button>
                     <!-- <button class="btn btn-success inline-flex paywithpaypal">Checkout</button> -->
                     <!-- <button class="btn btn-primary inline-flex exportCSV">Export CSV</button> -->
                     <h4 class="total_price_checkout inline-flex"><span class="checkout_price">0 </span> AED</h4>
