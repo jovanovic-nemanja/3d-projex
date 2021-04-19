@@ -264,7 +264,6 @@
                   <thead>
                     <td>ID</td>
                     <td>Name</td>
-                    <td>Photo</td>
                     <td>Count</td>
                     <td>Price</td>
                     <td>All Price</td>
@@ -279,7 +278,7 @@
                   <div class="col-md-6 alignRight">
                     <button class="btn btn-success inline-flex checkoutwithBackend">Checkout</button>
                     <!-- <button class="btn btn-success inline-flex paywithpaypal">Checkout</button> -->
-                    <button class="btn btn-primary inline-flex exportCSV">Export CSV</button>
+                    <!-- <button class="btn btn-primary inline-flex exportCSV">Export CSV</button> -->
                     <h4 class="total_price_checkout inline-flex"><span class="checkout_price">0 </span> AED</h4>
                   </div>
                 </div>                

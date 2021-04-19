@@ -449,7 +449,7 @@ function checkout() {
     $('#checkout_tbody').empty();
     var tbody = $('#checkout_tbody');
     for(var i=0; i<arr_items.length; i++) {
-      var element = "<tr><td>" + (i+1) + "</td><td>" + arr_items[i].itemName + "</td><td><img src='" + arr_items[i].itemPhoto + "' style='height: 30rem;' /></td><td>" + arr_items[i].itemCount + "</td><td>" + formatNumbertoNew(arr_items[i].itemPrice) + "</td><td>" + formatNumbertoNew(arr_items[i].itemCount * arr_items[i].itemPrice) + "</td></tr>";
+      var element = "<tr><td>" + (i+1) + "</td><td>" + arr_items[i].itemName + "</td><td>" + arr_items[i].itemCount + "</td><td>" + formatNumbertoNew(arr_items[i].itemPrice) + "</td><td>" + formatNumbertoNew(arr_items[i].itemCount * arr_items[i].itemPrice) + "</td></tr>";
       tbody.append(element);
     }
   }
