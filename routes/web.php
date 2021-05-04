@@ -59,6 +59,7 @@ Route::POST('/admin/wallpapers/storage', 'Admin\WallpapersController@storage')->
 Route::get('/paymentrequest', 'PaymentController@index');
 // route for processing payment
 Route::post('paymentrequest', 'PaymentController@payWithpaypal');
+Route::post('paymentngeniusrequest', 'PaymentController@paymentngeniusrequest');
 // route for check status of the payment
 Route::get('paymentstatus', 'PaymentController@getPaymentStatus');
 

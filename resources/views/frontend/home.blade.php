@@ -277,6 +277,7 @@
                   <div class="col-md-6"></div>
                   <div class="col-md-6 alignRight">
                     <button class="btn btn-success inline-flex checkoutwithBackend">Order Placed</button>
+                    <button class="btn btn-success inline-flex ngenius">Payment with N-Genius</button>
                     <!-- <button class="btn btn-success inline-flex paywithpaypal">Checkout</button> -->
                     <!-- <button class="btn btn-primary inline-flex exportCSV">Export CSV</button> -->
                     <h4 class="total_price_checkout inline-flex"><span class="checkout_price">0 </span> AED</h4>
@@ -302,6 +303,16 @@
                  <label class="w3-text-blue"><b>Enter Amount</b></label>
                  <input class="w3-input w3-border" id="amount" type="text" name="amount"></p>
                  <button class="w3-btn w3-blue paymentrequest">Pay with PayPal</button>
+                </form>
+
+                <form class="w3-container w3-display-middle w3-card-4 w3-padding-16" method="POST" id="payment-ngenius-form" action="{!! URL::to('paymentngeniusrequest') !!}" style="display: none;">
+                 <div class="w3-container w3-teal w3-padding-16">Paywith Paypal</div>
+                 {{ csrf_field() }}
+                 <h2 class="w3-text-blue">Payment Form</h2>
+                 <p>Demo PayPal form - Integrating paypal in laravel</p>
+                 <label class="w3-text-blue"><b>Enter Amount</b></label>
+                 <input class="w3-input w3-border" id="ngenius_amount" type="text" name="ngenius_amount" />
+                 <button class="w3-btn w3-blue paymentngeniusrequest">Pay with N-genius</button>
                 </form>
               </div>
             </div>
