@@ -126,7 +126,7 @@ class PaymentController extends Controller
     {
         $apikey = "YmI3ZTM1YTctNzdiMy00OTUzLTk3OWUtYzkyMTQ5NTg0OGVmOjU5NjE0MGI1LTYxN2ItNGQ4Ny1hNzI0LThiZDRkYzIxZTdmMg==";     // enter your API key here
         $ch = curl_init(); 
-        // curl_setopt($ch, CURLOPT_URL, "https://api-gateway.sandbox.ngenius-payments.com/identity/auth/access-token"); 
+        // curl_setopt($ch, CURLOPT_URL, "https://api-gateway.sandbox.ngenius-payments.com/identity/auth/access-token");         
         curl_setopt($ch, CURLOPT_URL, "https://identity.ngenius-payments.com/auth/realms/NetworkInternational/protocol/openid-connect/token"); 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "accept: application/vnd.ni-identity.v1+json",
@@ -136,7 +136,9 @@ class PaymentController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);   
         curl_setopt($ch, CURLOPT_POST, 1); 
         curl_setopt($ch, CURLOPT_POSTFIELDS,  "{\"realmName\":\"ni\"}"); 
+        dd(curl_exec($ch));
         $output = json_decode(curl_exec($ch)); 
+
         $access_token = $output->access_token;
         curl_close ($ch);
 
