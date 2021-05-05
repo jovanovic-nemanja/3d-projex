@@ -126,7 +126,8 @@ class PaymentController extends Controller
     {
         $apikey = "YmI3ZTM1YTctNzdiMy00OTUzLTk3OWUtYzkyMTQ5NTg0OGVmOjU5NjE0MGI1LTYxN2ItNGQ4Ny1hNzI0LThiZDRkYzIxZTdmMg==";     // enter your API key here
         $ch = curl_init(); 
-        curl_setopt($ch, CURLOPT_URL, "https://api-gateway.sandbox.ngenius-payments.com/identity/auth/access-token"); 
+        // curl_setopt($ch, CURLOPT_URL, "https://api-gateway.sandbox.ngenius-payments.com/identity/auth/access-token"); 
+        curl_setopt($ch, CURLOPT_URL, "https://identity.ngenius-payments.com/auth/realms/NetworkInternational/protocol/openid-connect/token"); 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "accept: application/vnd.ni-identity.v1+json",
             "authorization: Basic ".$apikey,
@@ -145,14 +146,14 @@ class PaymentController extends Controller
         $postData->amount->currencyCode = "AED"; 
         $postData->amount->value = $request->ngenius_amount*100; 
 
-        $outlet = "9d77927e-8bd6-4e35-a350-90cc9fe7bc4c";
+        $outlet = "eb5693c2-829c-4774-89fb-2a46acca49f5";
         $token = $access_token;
          
         $json = json_encode($postData);
 
         $ch1 = curl_init(); 
          
-        curl_setopt($ch1, CURLOPT_URL, "https://api-gateway.sandbox.ngenius-payments.com/transactions/outlets/".$outlet."/orders"); 
+        curl_setopt($ch1, CURLOPT_URL, "https://api-gateway.ngenius-payments.com/transactions/outlets/".$outlet."/orders"); 
         curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
             "Authorization: Bearer ".$token, 
             "Content-Type: application/vnd.ni-payment.v2+json", 
