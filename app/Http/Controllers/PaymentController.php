@@ -124,52 +124,61 @@ class PaymentController extends Controller
 
     public function paymentngeniusrequest(Request $request)
     {
-        $apikey = "YmI3ZTM1YTctNzdiMy00OTUzLTk3OWUtYzkyMTQ5NTg0OGVmOjU5NjE0MGI1LTYxN2ItNGQ4Ny1hNzI0LThiZDRkYzIxZTdmMg==";     // enter your API key here
-        $ch = curl_init(); 
-        // curl_setopt($ch, CURLOPT_URL, "https://api-gateway.sandbox.ngenius-payments.com/identity/auth/access-token");         
-        curl_setopt($ch, CURLOPT_URL, "https://identity.ngenius-payments.com/auth/realms/NetworkInternational/protocol/openid-connect/token"); 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "accept: application/vnd.ni-identity.v1+json",
-            "authorization: Basic ".$apikey,
-            "content-type: application/vnd.ni-identity.v1+json"
-          )); 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);   
-        curl_setopt($ch, CURLOPT_POST, 1); 
-        curl_setopt($ch, CURLOPT_POSTFIELDS,  "{\"realmName\":\"ni\"}"); 
-        dd(curl_exec($ch));
-        $output = json_decode(curl_exec($ch)); 
+        $outletRef   = "eb5693c2-829c-4774-89fb-2a46acca49f5";    // set your outlet reference/ID value here (example only)
+        $apikey      = "NDBkNTNjODktOTMyOC00ZGM3LWJjNmQtYzYyNDIwM2ZiN2MyOmZhYjI3MDQzLWI2ZmUtNGMxOC05OGM3LWMzNWFlODM0MmQwMw==";  // set your service account API key (example only)
 
-        $access_token = $output->access_token;
+        $idServiceURL  = "https://identity.ngenius-payments.com/auth/realms/NetworkInternational/protocol/openid-connect/token";  // set the identity service URL (example only)
+        $txnServiceURL = "https://api-gateway.ngenius-payments.com/transactions/outlets/".$outletRef."/orders"; // set the transaction service URL (example only)
+
+        $tokenHeaders  = array("Authorization: Basic ".$apikey, "Content-Type: application/x-www-form-urlencoded");
+        $tokenResponse = $this->invokeCurlRequest("POST", $idServiceURL, $tokenHeaders, http_build_query(array('grant_type' => 'client_credentials')));
+        $tokenResponse = json_decode($tokenResponse);
+
+        $access_token = $tokenResponse->access_token;
+
+        $order = new \StdClass();
+
+        $order->action = "AUTH";    // Transaction mode ("AUTH" = authorize only, no automatic settle/capture, "SALE" = authorize + automatic settle/capture)
+        $order->amount = new \StdClass();
+        $order->amount->currencyCode = "AED";   // Payment currency ('AED' only for now)
+        $order->amount->value = $request->ngenius_amount*100; // Minor units (1000 = 10.00 AED)
+        $order->language = "en";    // Payment page language ('en' or 'ar' only)
+
+        $order->merchantAttributes = new \StdClass();
+        $order->merchantOrderReference = time();    // Payment page language ('en' or 'ar' only)
+        $order->merchantAttributes->redirectUrl = "https://3d.projexcost.com/"; 
+        $order = json_encode($order);  
+
+        $orderCreateHeaders  = array("Authorization: Bearer ".$access_token, "Content-Type: application/vnd.ni-payment.v2+json", "Accept: application/vnd.ni-payment.v2+json");
+        $orderCreateResponse = $this->invokeCurlRequest("POST", $txnServiceURL, $orderCreateHeaders, $order);
+        // dd($orderCreateResponse);
+
+        $orderCreateResponse = json_decode($orderCreateResponse);
+        $paymentLink           = $orderCreateResponse->_links->payment->href;   // the link to the payment page for redirection (either full-page redirect or iframe)
+        $orderReference      = $orderCreateResponse->reference; // the reference to the order, which you should store in your records for future interaction with this order
+
+        header("Location: ".$paymentLink);  // execute redirect
+        exit;
+    }
+
+    private function invokeCurlRequest($type, $url, $headers, $post) 
+    {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);     
+
+        if ($type == "POST") {
+
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+        }
+
+        $server_output = curl_exec ($ch);
         curl_close ($ch);
 
-        $postData = new \StdClass(); 
-        $postData->action = "SALE"; 
-        $postData->amount = new \StdClass();
-        $postData->amount->currencyCode = "AED"; 
-        $postData->amount->value = $request->ngenius_amount*100; 
-
-        $outlet = "eb5693c2-829c-4774-89fb-2a46acca49f5";
-        $token = $access_token;
-         
-        $json = json_encode($postData);
-
-        $ch1 = curl_init(); 
-         
-        curl_setopt($ch1, CURLOPT_URL, "https://api-gateway.ngenius-payments.com/transactions/outlets/".$outlet."/orders"); 
-        curl_setopt($ch1, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer ".$token, 
-            "Content-Type: application/vnd.ni-payment.v2+json", 
-            "Accept: application/vnd.ni-payment.v2+json")); 
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);   
-        curl_setopt($ch1, CURLOPT_POST, 1); 
-        curl_setopt($ch1, CURLOPT_POSTFIELDS, $json); 
-         
-        $output = json_decode(curl_exec($ch1)); 
-        $order_reference = $output->reference; 
-        $order_paypage_url = $output->_links->payment->href; 
-        header("Location: ".$order_paypage_url);
-        curl_close ($ch1);
-
-        exit;
+        return $server_output;
     }
 }
